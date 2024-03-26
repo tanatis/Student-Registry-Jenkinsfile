@@ -21,5 +21,14 @@ pipeline {
                 sh 'npm run test'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                script{
+                    input('Are you sure you want to deploy?')
+                }
+                echo 'Deploying'
+            }
+        }
     }
 }
