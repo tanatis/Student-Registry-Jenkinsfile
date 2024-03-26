@@ -1,12 +1,24 @@
 pipeline {
     agent any
 
+    tools {nodejs "node_20"}
+
     stages {
         stage('Install') {
             steps {
-                withNPM(npmrcConfig: 'my-custom-nprc') {
-                    sh 'npm install'
-                }
+                sh 'npm install'
+            }
+        }
+
+        stage('Audit') {
+            steps {
+                sh 'npm audit'
+            }
+        }
+
+        stage('Tests') {
+            steps {
+                sh 'npm run test'
             }
         }
     }
